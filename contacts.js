@@ -15,10 +15,9 @@ async function listContacts() {
 }
 
 async function getContactById(contactId) {
-  const normalizedId = Number(contactId);
   try {
     const contacts = await listContacts();
-    const findContact = contacts.find(item => item.id === normalizedId);
+    const findContact = contacts.find(item => item.id == contactId);
     if (!findContact) {
       throw new Error('Incorrect ID');
     }
@@ -40,10 +39,9 @@ async function updateContactsList(contacts) {
 }
 
 async function removeContact(contactId) {
-  const normalizedId = Number(contactId);
   try {
     const contacts = await listContacts();
-    const filteredContacts = contacts.filter(item => item.id !== normalizedId);
+    const filteredContacts = contacts.filter(item => item.id != contactId);
 
     await updateContactsList(filteredContacts);
   } catch (error) {
